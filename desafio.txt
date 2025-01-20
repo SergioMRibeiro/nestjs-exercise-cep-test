@@ -1,0 +1,52 @@
+Desenvolver uma api usando nest js 
+
+utilizar strict true no ts-config
+seguir arquitetura minima de controller/service/repository, de resto siga as melhoras praticas que julgar nescessario
+
+api para pegar dados dado um cep : https://viacep.com.br/ws/01001000/json
+salvar dados em um banco sql de sua escolha, pode usar sqlite
+
+pensar nas regras de negocio basicas(duas pessoas com mesmo cpf, erros e respostas http basicas).
+
+teste unitario usando jest js para service e repository
+
+rota 1 
+cadastrar um cliente e seu endereco completo( cidade, estado , rua) seguindo o seguinte contrato:
+
+post /user:
+{
+	cpf : string,
+	cep: string,
+	houseNumber:number	
+}
+
+retorno esperado:
+
+{
+	cpf: : string,
+	address:{
+		cep:: string,
+		houseNumber: number,
+		city:string,
+		state: string,
+		street: string,
+	}
+}
+
+rota 2 
+
+get /user/:cpf
+
+retorno esperado:
+
+{
+	cpf: : string,
+	address:{
+		cep:: string,
+		houseNumber: number,
+		city:string,
+		state: string,
+		street: string,
+	}
+}
+
