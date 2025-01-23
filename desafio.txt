@@ -50,3 +50,14 @@ retorno esperado:
 	}
 }
 
+obs:
+1 V colocar controller async e tipagem de retorno
+2 V validação de payloud de entrada
+
+3 V trocar let por const
+4 V isolar regras de CPF fora da camada do service
+5 V isolar a chamada do getaddressByCep
+6 V tipar todas as func
+7 V criar uma classe user maper para mapear a entidade do banco para o dto
+
+8 V testeunitário : has been called with: validar como as dependencias estão sendo chamadas

@@ -1,16 +1,13 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
-import { UsersRepository } from "../../data/repositories/users.repository";
-import { CreateUserDto } from "../../dto/users/create-user.dto";
-import { User } from "../../entities/user.entity";
+import { UsersRepository } from "../data/repositories/users.repository";
+import { CreateUserDto } from "../dto/users/create-user.dto";
+import { User } from "../entities/user.entity";
 import { Repository } from "typeorm";
 
 
 describe('UsersRepository', () => {
-    let usersRepository: UsersRepository;
-    let userRepository: Repository<User>;
-
-    beforeEach(async () => {
+        const initializeTestingModule = async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 UsersRepository,
@@ -21,16 +18,20 @@ describe('UsersRepository', () => {
             ],
         }).compile();
 
-        usersRepository = module.get<UsersRepository>(UsersRepository);
-        userRepository = module.get<Repository<User>>(getRepositoryToken(User));
-    });
+        return {
+            usersRepository: module.get<UsersRepository>(UsersRepository),
+            userRepository: module.get<Repository<User>>(getRepositoryToken(User)),
+        };
+    };
 
-    it('should be defined', () => {
+    it('should be defined', async () => {
+        const { usersRepository } = await initializeTestingModule();
         expect(usersRepository).toBeDefined();
     });
 
     describe('getUsers', () => {
         it('should return an array of users', async () => {
+            const { userRepository, usersRepository } = await initializeTestingModule();
             const users: User[] = [{ id: 1, cpf: '12345678901', cep: '25976185', houseNumber: '256' }];
             jest.spyOn(userRepository, 'find').mockResolvedValue(users);
 
@@ -38,23 +39,26 @@ describe('UsersRepository', () => {
         });
     });
 
-    describe('getUser', () => {
+    describe('getUserByCPF', () => {
         it('should return a user by cpf', async () => {
+            const { userRepository, usersRepository } = await initializeTestingModule();
             const user: User = { id: 1, cpf: '12345678901', cep: '25976185', houseNumber: '256' };
             jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
 
-            expect(await usersRepository.getUser('12345678901')).toEqual(user);
+            expect(await usersRepository.getUserByCPF('12345678901')).toEqual(user);
         });
 
         it('should return null if user not found', async () => {
+            const { userRepository, usersRepository } = await initializeTestingModule();
             jest.spyOn(userRepository, 'findOne').mockResolvedValue(null);
 
-            expect(await usersRepository.getUser('12345678901')).toBeNull();
+            expect(await usersRepository.getUserByCPF('12345678901')).toBeNull();
         });
     });
 
     describe('createUser', () => {
         it('should create and return a new user', async () => {
+            const { userRepository, usersRepository } = await initializeTestingModule();
             const createUserDto: CreateUserDto = { cpf: '12345678901', cep: '25976185', houseNumber: '256' };
             const user: User = { id: 1, ...createUserDto };
             jest.spyOn(userRepository, 'create').mockReturnValue(user);

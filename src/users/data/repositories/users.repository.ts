@@ -16,7 +16,7 @@ export class UsersRepository {
     return await this.userRepository.find();
   }
 
-  async getUser(cpf: string): Promise<User| null> {
+  async getUserByCPF(cpf: string): Promise<User| null> {
     return await this.userRepository.findOne({ where: { cpf } });
   }
 
