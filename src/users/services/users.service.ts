@@ -4,7 +4,7 @@ import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { UsersRepository } from '../data/repositories/users.repository';
 import { User } from '../entities/user.entity';
 import { UserDefaultReturnInterface } from '../../users/utils/interfaces';
-import { AddressService } from '../../addres/services/addres.service';
+import { AddressService } from '../../address/services/address.service';
 import { isValidCEP, isValidCPF } from '../utils/validation';
 import { UsersMapper } from '../maper/users.maper';
 

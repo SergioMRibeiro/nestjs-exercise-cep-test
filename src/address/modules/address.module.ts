@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { AddressService } from "../services/addres.service";
+import { AddressService } from "../services/address.service";
 
 @Module({
     providers: [AddressService],

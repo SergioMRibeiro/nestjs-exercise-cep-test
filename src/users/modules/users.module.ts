@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
 import { UsersController } from 'src/users/controllers/users.controller';
 import { UsersRepository } from 'src/users/data/repositories/users.repository';
-import { AddressModule } from 'src/addres/modules/addres.module';
+import { AddressModule } from 'src/address/modules/address.module';
 
 @Module({
   imports: [DatabaseModule, TypeOrmModule.forFeature([User]), AddressModule],

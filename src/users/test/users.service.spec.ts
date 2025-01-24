@@ -6,10 +6,9 @@ import { UsersRepository } from '../data/repositories/users.repository';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { AddressService } from '../../addres/services/addres.service';
+import { AddressService } from '../../address/services/address.service';
 import { UsersMapper } from '../maper/users.maper';
 
-jest.mock('axios');
 
 describe('UsersService', () => {
   const initializeTestingModule = async () => {
